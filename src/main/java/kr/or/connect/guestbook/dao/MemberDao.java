@@ -1,9 +1,5 @@
 package kr.or.connect.guestbook.dao;
 
-import static kr.or.connect.daoexam.dao.RoleDaoSqls.SELECT_BY_ROLE_ID;
-import static kr.or.connect.guestbook.dao.GuestbookDaoSqls.SELECT_COUNT;
-import static kr.or.connect.guestbook.dao.GuestbookDaoSqls.SELECT_PAGING;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +8,6 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -22,7 +17,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.guestbook.dto.Member;
-
 import static kr.or.connect.guestbook.dao.MemberDaoSqls.*;
 
 @Repository
@@ -48,6 +42,7 @@ public class MemberDao {
     }
     
     public int selectCount() {
+    	
 		return jdbc.queryForObject(SELECT_COUNT, Collections.emptyMap(), Integer.class);
 	}
     
@@ -55,8 +50,10 @@ public class MemberDao {
     	Map<String,String> params = new HashMap<>();
     	params.put("id", id);
     	params.put("password", password);
-    	
     	List<Member> member = jdbc.query(SELECT_BY_ID, params, rowMapper);
-    	return Optional.ofNullable(member.get(0));
+    	if(member.size() == 0) {
+    		return Optional.ofNullable(null);
+    	}
+    	return Optional.of(member.get(0));
     }
 }

@@ -31,11 +31,14 @@ public class GuestbookMemberController {
 	
 	@PostMapping(path="/login")
 	public String login(@RequestParam(value = "id") String id, @RequestParam(value = "password") String password, HttpSession session) {
-		Member member = memberService.loginById(id, password).get();
-		if(member == null) {
+	
+		if(memberService.loginById(id, password).isEmpty()) {
 			return "redirect:login";
 		}
+		
 		else {
+			Member member = memberService.loginById(id, password).get();
+			session.setAttribute("name", member.getName());
 			session.setAttribute("id", id);
 		}
 	
