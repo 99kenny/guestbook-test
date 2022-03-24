@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,11 @@ public class GuestbookController {
 	
 	@GetMapping(path="/list")
 	public String list(@RequestParam(name="start", required=false, defaultValue="0") int start,
-					   ModelMap model) {
-		
+					   ModelMap model, HttpSession session) {
+		if(session.getAttribute("id") == null) {
+			System.out.println("user not logged in");
+			return "authority_err";
+		}
 		// start로 시작하는 방명록 목록 구하기
 		List<Guestbook> list = guestbookService.getGuestbooks(start);
 		
@@ -52,7 +56,9 @@ public class GuestbookController {
 	
 	@PostMapping(path="/write")
 	public String write(@ModelAttribute Guestbook guestbook,
-						HttpServletRequest request) {
+						HttpServletRequest request, HttpSession session) {
+		
+		guestbook.setName((String)session.getAttribute("id"));
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
 		guestbookService.addGuestbook(guestbook, clientIp);
