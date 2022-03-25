@@ -58,7 +58,8 @@ public class GuestbookController {
 	public String write(@ModelAttribute Guestbook guestbook,
 						HttpServletRequest request, HttpSession session) {
 		
-		guestbook.setName((String)session.getAttribute("id"));
+		guestbook.setName((String)session.getAttribute("name"));
+		guestbook.setUserId((String)session.getAttribute("id"));
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
 		guestbookService.addGuestbook(guestbook, clientIp);

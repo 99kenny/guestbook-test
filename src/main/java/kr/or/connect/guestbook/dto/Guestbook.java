@@ -7,6 +7,7 @@ public class Guestbook {
 	private String name;
 	private String content;
 	private Date regdate;
+	private String userId;
 	public Long getId() {
 		return id;
 	}
@@ -31,8 +32,14 @@ public class Guestbook {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	@Override
 	public String toString() {
-		return "Guestbook [id=" + id + ", name=" + name + ", content=" + content + ", regdate=" + regdate + "]";
+		return "Guestbook [id=" + id + ", name=" + name + ", userId=" + userId + "content=" + content + ", regdate=" + regdate + "]";
 	}
 }

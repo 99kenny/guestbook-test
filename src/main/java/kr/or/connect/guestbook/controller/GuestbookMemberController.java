@@ -55,4 +55,11 @@ public class GuestbookMemberController {
 		memberService.addMember(member);
 		return "redirect:login";
 	}
+	
+	@GetMapping(path="/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("id");
+		session.removeAttribute("name");
+		return "redirect:login";
+	}
 }

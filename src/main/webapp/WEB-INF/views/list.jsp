@@ -16,11 +16,10 @@
 
 	<c:forEach items="${list}" var="guestbook">
 
-${guestbook.id }<br>
-${guestbook.name }<br>
+${guestbook.userId }(${guestbook.name })<br>
 ${guestbook.content }<br>
 ${guestbook.regdate }<br>
-
+<br>
 	</c:forEach>
 	<br>
 
@@ -30,10 +29,12 @@ ${guestbook.regdate }<br>
 
 	<br>
 	<br>
+	${guestbook.userId }
 	<form method="post" action="write">
-		name : <input type="text" name="name"><br>
-		<textarea name="content" cols="60" rows="6"></textarea>
+		<textarea name="content" cols="60" rows="6" minlength="1"></textarea>
 		<br> <input type="submit" value="등록">
 	</form>
+	
+	<a href="logout">로그아웃</a>
 </body>
 </html>
