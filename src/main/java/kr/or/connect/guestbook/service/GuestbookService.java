@@ -1,4 +1,4 @@
-package kr.oe.connect.guestbook.service;
+package kr.or.connect.guestbook.service;
 
 import java.util.List;
 

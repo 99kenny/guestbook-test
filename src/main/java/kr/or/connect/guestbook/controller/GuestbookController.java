@@ -14,21 +14,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.oe.connect.guestbook.service.GuestbookService;
 import kr.or.connect.guestbook.dto.Guestbook;
+import kr.or.connect.guestbook.service.GuestbookService;
 
 @Controller
 public class GuestbookController {
 	@Autowired
 	GuestbookService guestbookService;
 	
+	public boolean isLoggedIn(HttpSession session) {
+		if(session.getAttribute("id") == null) {
+			System.out.println("user not logged in");
+			return false;
+		}
+		//System.out.println("user :" + session.getAttribute("id"));
+		return true;
+	}
+	
 	@GetMapping(path="/list")
 	public String list(@RequestParam(name="start", required=false, defaultValue="0") int start,
 					   ModelMap model, HttpSession session) {
-		if(session.getAttribute("id") == null) {
-			System.out.println("user not logged in");
-			return "authority_err";
-		}
+		//로그인 체크
+		if(!isLoggedIn(session)) return "authority_err";
 		// start로 시작하는 방명록 목록 구하기
 		List<Guestbook> list = guestbookService.getGuestbooks(start);
 		
@@ -57,11 +64,20 @@ public class GuestbookController {
 	@PostMapping(path="/write")
 	public String write(@ModelAttribute Guestbook guestbook,
 						HttpServletRequest request, HttpSession session) {
+		System.out.println("content :" + guestbook.getContent() + ";");
+		
+		//로그인 체크
+		if(!isLoggedIn(session)) return "authority_err";
+		//빈 문자열인지 치크
+		String content = guestbook.getContent().trim();
+		if(content.length() == 0) {
+			return "redirect:list";
+		}
 		
 		guestbook.setName((String)session.getAttribute("name"));
 		guestbook.setUserId((String)session.getAttribute("id"));
 		String clientIp = request.getRemoteAddr();
-		System.out.println("clientIp : " + clientIp);
+		//System.out.println("clientIp : " + clientIp);
 		guestbookService.addGuestbook(guestbook, clientIp);
 		return "redirect:list";
 	}

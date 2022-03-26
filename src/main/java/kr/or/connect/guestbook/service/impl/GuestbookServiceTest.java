@@ -5,9 +5,9 @@ import java.util.Date;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import kr.oe.connect.guestbook.service.GuestbookService;
 import kr.or.connect.guestbook.config.ApplicationConfig;
 import kr.or.connect.guestbook.dto.Guestbook;
+import kr.or.connect.guestbook.service.GuestbookService;
 
 public class GuestbookServiceTest {
 	public static void main(String[] args) {

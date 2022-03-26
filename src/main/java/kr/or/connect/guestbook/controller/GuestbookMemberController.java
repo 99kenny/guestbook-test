@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.oe.connect.guestbook.service.MemberService;
 import kr.or.connect.guestbook.dao.MemberDao;
 import kr.or.connect.guestbook.dto.Member;
+import kr.or.connect.guestbook.service.MemberService;
 
 @Controller
 public class GuestbookMemberController {

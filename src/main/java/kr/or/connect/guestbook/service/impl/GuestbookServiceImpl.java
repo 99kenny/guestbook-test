@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.oe.connect.guestbook.service.GuestbookService;
 import kr.or.connect.guestbook.dao.GuestbookDao;
 import kr.or.connect.guestbook.dao.LogDao;
 import kr.or.connect.guestbook.dto.Guestbook;
 import kr.or.connect.guestbook.dto.Log;
+import kr.or.connect.guestbook.service.GuestbookService;
 
 @Service
 public class GuestbookServiceImpl implements GuestbookService{

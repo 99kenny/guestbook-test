@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.oe.connect.guestbook.service.MemberService;
 import kr.or.connect.guestbook.dao.MemberDao;
 import kr.or.connect.guestbook.dto.Member;
+import kr.or.connect.guestbook.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService{

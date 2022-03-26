@@ -1,11 +1,12 @@
-package kr.oe.connect.guestbook.service;
+package kr.or.connect.guestbook.service;
+
+import kr.or.connect.guestbook.dto.Member;
 
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-import kr.or.connect.guestbook.dto.Member;
 
 public interface MemberService {
 	public Member addMember(Member member);

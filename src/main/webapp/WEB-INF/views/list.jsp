@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="js/list.js"></script>
 <title>방명록 목록</title>
 </head>
 <body>
@@ -31,10 +32,9 @@ ${guestbook.regdate }<br>
 	<br>
 	${guestbook.userId }
 	<form method="post" action="write">
-		<textarea name="content" cols="60" rows="6" minlength="1"></textarea>
-		<br> <input type="submit" value="등록">
+		<textarea id="content" name="content" cols="60" rows="6" minlength="1"></textarea>
+		<br> <input id="button" type="submit" value="등록" disabled="true">
 	</form>
-	
 	<a href="logout">로그아웃</a>
 </body>
 </html>
