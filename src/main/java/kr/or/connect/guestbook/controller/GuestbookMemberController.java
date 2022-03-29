@@ -20,9 +20,10 @@ public class GuestbookMemberController {
 	MemberService memberService;
 	@GetMapping(path="/login")
 	public String toLonginPage(HttpSession session) {
-		if(session.getAttribute("id") != null) {
-			System.out.println(session.getAttribute("id"));
-			return "redirect:list";
+		String id = (String) session.getAttribute("id");
+		if(id != null) {
+			//System.out.println(session.getAttribute("id"));
+			return "redirect:userlist?user="+id;
 		}
 		else {
 			return "login";
@@ -33,7 +34,7 @@ public class GuestbookMemberController {
 	public String login(@RequestParam(value = "id") String id, @RequestParam(value = "password") String password, HttpSession session) {
 	
 		if(memberService.loginById(id, password).isEmpty()) {
-			return "redirect:login";
+			return "login";
 		}
 		
 		else {
@@ -42,7 +43,7 @@ public class GuestbookMemberController {
 			session.setAttribute("id", id);
 		}
 	
-		return "redirect:list";
+		return "redirect:userlist?user="+id;
 	}
 	
 	@GetMapping(path="/signup")
@@ -53,13 +54,13 @@ public class GuestbookMemberController {
 	@PostMapping(path="/signup")
 	public String signup(@ModelAttribute Member member) {
 		memberService.addMember(member);
-		return "redirect:login";
+		return "login";
 	}
 	
 	@GetMapping(path="/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("id");
 		session.removeAttribute("name");
-		return "redirect:login";
+		return "login";
 	}
 }

@@ -8,6 +8,7 @@ public class Guestbook {
 	private String content;
 	private Date regdate;
 	private String userId;
+	private String guestbookLocation;
 	public Long getId() {
 		return id;
 	}
@@ -38,8 +39,17 @@ public class Guestbook {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+	public String getGuestbookLocation() {
+		return guestbookLocation;
+	}
+	public void setGuestbookLocation(String guestbookLocation) {
+		this.guestbookLocation = guestbookLocation;
+	}
 	@Override
 	public String toString() {
-		return "Guestbook [id=" + id + ", name=" + name + ", userId=" + userId + "content=" + content + ", regdate=" + regdate + "]";
+		return "Guestbook [id=" + id + ", name=" + name + ", content=" + content + ", regdate=" + regdate + ", userId="
+				+ userId + ", guestbookLocation=" + guestbookLocation + "]";
 	}
+	
 }

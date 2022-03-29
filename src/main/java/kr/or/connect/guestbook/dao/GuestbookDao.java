@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.guestbook.dto.Guestbook;
+import kr.or.connect.guestbook.dto.Params;
 
 import static kr.or.connect.guestbook.dao.GuestbookDaoSqls.*;
 
@@ -24,7 +25,7 @@ public class GuestbookDao {
 	private NamedParameterJdbcTemplate jdbc;
     private SimpleJdbcInsert insertAction;
     private RowMapper<Guestbook> rowMapper = BeanPropertyRowMapper.newInstance(Guestbook.class);
-
+    
     public GuestbookDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
         this.insertAction = new SimpleJdbcInsert(dataSource)
@@ -32,12 +33,16 @@ public class GuestbookDao {
                 .usingGeneratedKeyColumns("id");
     }
     
-    public List<Guestbook> selectAll(Integer start, Integer limit) {
-    		Map<String, Integer> params = new HashMap<>();
-    		params.put("start", start);
-    		params.put("limit", limit);
-        return jdbc.query(SELECT_PAGING, params, rowMapper);
+    public List<Guestbook> selectAll(Params params) {
+    	//sql문 매개변수 :start, :limit, :guestbookLocation 매칭해주는 객체 
+    	SqlParameterSource p = new BeanPropertySqlParameterSource(params);
+    	
+        return jdbc.query(SELECT_PAGING, p, rowMapper);
     }
+//    public List<Guestbook> selectAll(Params params){
+//    	SqlParameterSource p = new BeanPropertySqlParameterSource(params);
+//    	return jdbc.query(SELECT, p, rowMapper);
+//    }
 
 
 	public Long insert(Guestbook guestbook) {
