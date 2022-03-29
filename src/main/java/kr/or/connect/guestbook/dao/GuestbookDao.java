@@ -39,6 +39,7 @@ public class GuestbookDao {
     	
         return jdbc.query(SELECT_PAGING, p, rowMapper);
     }
+    
 //    public List<Guestbook> selectAll(Params params){
 //    	SqlParameterSource p = new BeanPropertySqlParameterSource(params);
 //    	return jdbc.query(SELECT, p, rowMapper);

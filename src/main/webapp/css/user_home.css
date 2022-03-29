@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+body {
+	background: #78e08f;
+	display: flex;
+	justify-content: center;
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	border: 1px solid black;
+	background: #b8e994;
+}
+
+#profile {
+	border: 1px solid black;
+	width: 200px;
+	margin:10px 10px 10px 10px;
+}
+
+#content {
+	border: 1px solid black;
+	width: 500px;
+	margin:10px 10px 10px 10px;
+}
+
+#nav {
+	border: 1px solid black;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100px;
+	margin:10px 10px 10px 10px;
+}
