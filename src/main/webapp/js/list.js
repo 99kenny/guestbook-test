@@ -3,6 +3,7 @@ window.addEventListener('load', function(){
 	//빈 문자열 막아놓기 
 	var textarea = document.getElementById("content");
 	textarea.addEventListener("input", (e) => {
+		console.log(e);
 		var content = e.currentTarget.value.trim();
 		var button = document.getElementById("button");
 		if(content.length === 0){

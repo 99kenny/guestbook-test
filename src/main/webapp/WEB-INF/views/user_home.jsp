@@ -8,10 +8,10 @@
 <%String id = (String)session.getAttribute("id");
 String name = (String)session.getAttribute("name");
 %>
-
-<link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/user_home.css">
-<title>환영합니다! ${name } 님!</title>
+<script src="/webjars/jquery/dist/jquery.min.js"></script>
+<script src="js/list.js"></script>
+<title>환영합니다! ${name }님!</title>
 </head>
 <body>
 	<main>
@@ -21,7 +21,9 @@ String name = (String)session.getAttribute("name");
 			<p>유기농바나나칩 맛있쪙</p>	
 		</aside>
 		
-		<article id="content">
+		<article id="page">
+			<h1 id="title">방명록</h1>
+			
 			<c:forEach items="${list}" var="guestbook">
 				${guestbook.userId }(${guestbook.name })<br>
 				${guestbook.content }<br>
@@ -52,8 +54,5 @@ String name = (String)session.getAttribute("name");
 		</nav>
 		
 	</main>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="js/list.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 </html>

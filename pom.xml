@@ -98,6 +98,17 @@
 		<artifactId>jackson-datatype-jdk8</artifactId>
 		<version>${jackson2.version}</version>
 	</dependency>
+	<!--jquery--> 
+	<dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.5.1 </version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>0.40</version>
+        </dependency>
   </dependencies>
 
   <build>
@@ -124,6 +135,9 @@
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
           <version>3.2.2</version>
+          <configuration>
+          	<failOnMissingWebXml>false</failOnMissingWebXml>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -142,6 +156,7 @@
 				<target>1.8</target>
 			</configuration>
 		</plugin>
+		
       </plugins>
     </pluginManagement>
   </build>
