@@ -1,8 +1,12 @@
 package kr.or.connect.guestbook.config;
 
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -44,5 +48,22 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	        resolver.setPrefix("/WEB-INF/views/");
 	        resolver.setSuffix(".jsp");
 	        return resolver;
+	    }
+	    
+	    //파일 업로드 설정
+	    @Bean(name = "multipartResolver")
+	    public CommonsMultipartResolver getResolver() throws IOException { 
+	    	CommonsMultipartResolver resolver= new CommonsMultipartResolver();
+	    	
+	    	//10MV
+	    	resolver.setMaxUploadSize(1024 * 1024 * 10);
+	    	
+	    	//2MB
+	    	resolver.setMaxUploadSizePerFile(1024 * 1024 * 2);
+	    	
+	    	//temp upload
+	    	resolver.setUploadTempDir(new FileSystemResource("C:\\upload\\tmp"));
+	    	resolver.setDefaultEncoding("UTF-8");
+	    	return resolver;
 	    }
 }
